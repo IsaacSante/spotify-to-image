@@ -1,0 +1,12 @@
+kagglehub
+transformers
+torch
+torchvision
+torchaudio
+Pillow
+numpy
+scikit-learn
+tqdm 
+selenium
+google-generativeai
+python-dotenv

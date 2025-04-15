@@ -1,0 +1,7 @@
+dataset/
+embeddings/
+__pycache__/
+.selenium_profiles/
+.env
+chromedriver
+
