@@ -176,7 +176,8 @@ if __name__ == "__main__":
     # - 'dataset/resized/resized/'
     # - 'dataset/images/'
     # Use os.listdir('dataset') or your file browser to find the correct image folder.
-    IMAGE_DATA_DIR = "dataset/train2014" # <--- SET THIS PATH # <--- !!! VERIFY AND CHANGE THIS PATH !!!
+    # IMAGE_DATA_DIR = "dataset/train2014" # <--- SET THIS PATH # <--- !!! VERIFY AND CHANGE THIS PATH !!!
+    IMAGE_DATA_DIR = "video_dataset/images" # <--- SET THIS PATH # <--- !!! VERIFY AND CHANGE THIS PATH !!!
     OUTPUT_DIR = "embeddings"
     # Consider reducing batch size if running on MPS or low-memory GPU/CPU
     PROCESSING_BATCH_SIZE = 16 # Maybe 8 or 16 for MPS/CPU, 32+ for good CUDA GPU

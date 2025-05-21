@@ -4,4 +4,7 @@ __pycache__/
 .selenium_profiles/
 .env
 chromedriver
-
+Backup
+segmented_imgs
+video_dataset
+.DS_Store

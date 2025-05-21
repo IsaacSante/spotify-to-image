@@ -10,3 +10,5 @@ tqdm
 selenium
 google-generativeai
 python-dotenv
+ultralytics
+opencv-python

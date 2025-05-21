@@ -7,6 +7,8 @@ import time
 import queue
 from typing import Optional, Dict
 from dotenv import load_dotenv
+from song_state import SongState
+song_state = SongState()
 
 from PIL import Image
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -24,6 +26,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(threadName)s - %
 load_dotenv()
 
 # --- Constants ---
+SHOW_PREVIEW = False
 EMBEDDINGS_DIR = "embeddings"
 EMBEDDINGS_FILE = os.path.join(EMBEDDINGS_DIR, "image_embeddings.npy")
 PATHS_FILE = os.path.join(EMBEDDINGS_DIR, "image_paths.pkl")
@@ -126,6 +129,9 @@ def handle_new_lyric(lyric_line: str):
             # 4. Introduce Delay and Display the top result
             if results:
                 top_image_path, score = results[0]
+                raw_path, score = results[0]
+                abs_path = os.path.abspath(raw_path)  
+                    
                 logging.info(f"      Top Image Match (Score: {score:.4f}): {os.path.relpath(top_image_path)}")
 
                 # --- Add Delay Here ---
@@ -133,7 +139,16 @@ def handle_new_lyric(lyric_line: str):
                 time.sleep(DISPLAY_DELAY_SECONDS)
                 # --- End Delay ---
 
-                display_top_image(top_image_path, visual_sentence)
+                song_state.update(
+                        original_lyric      = lyric_line,
+                        analyzed_lyric      = visual_sentence,
+                        lyric_image_path    = abs_path,
+                    )
+
+                song_state.send_to_td()
+
+                if SHOW_PREVIEW:
+                    display_top_image(top_image_path, visual_sentence)
             else:
                 logging.warning(f"      No image results found for sentence: '{visual_sentence}'")
                 print("----- No matching image found.") # Add clear console message
@@ -171,6 +186,11 @@ def monitor_song_title_and_trigger_analysis():
                 logging.info(f"\n{'='*20} New Song Detected: {current_title} {'='*20}")
                 last_processed_title = current_title
                 storage.start_new_song(current_title)
+                song_state.update(song_title=current_title,
+                  original_lyric=None,
+                  analyzed_lyric=None,
+                  lyric_image_path=None)
+                song_state.send_to_td()
                 print(f"Fetching full lyrics for '{current_title}'...")
                 time.sleep(1.0)
                 full_lyrics = song_info.get_fullscreen_lyrics()
