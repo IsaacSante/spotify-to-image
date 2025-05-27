@@ -90,62 +90,6 @@ class LLMAnalysis:
         )
         return prompt
 
-    # def generate_prompt(self, cleaned_lyrics: str) -> str:
-    #     prompt = (
-    #         "You are an assistant creating extremely simple visual keywords from song lyrics for an image search.\n"
-    #         "Analyze these song lyrics line by line. For EACH line, generate a **minimal visual description** focusing on the absolute core subject, action, or object.\n\n"
-    #         "**Key Requirements:**\n"
-    #         "1.  **Extreme Simplicity:** Use only 2-4 essential words. Think Subject-Verb, Subject-Adjective, or core Noun-Phrase.\n"
-    #         "2.  **Keywords:** Output should resemble search keywords (e.g., 'sun shining', 'man running', 'sad face', 'red car').\n"
-    #         "3.  **Omit Unnecessary Words:** STRICTLY AVOID articles (a, an, the), prepositions (in, on, under, with), conjunctions (and, but), and descriptive filler unless absolutely essential for meaning.\n"
-    #         "4.  **Core Visual Only:** If a lyric has multiple ideas, pick the SINGLE most dominant, concrete visual element.\n"
-    #         "5.  **Abstract Concepts:** Translate to the simplest possible visual icon/keyword (e.g., 'love' -> 'heart shape', 'sadness' -> 'crying face' or 'rain cloud', 'idea' -> 'lightbulb').\n"
-    #         "6.  **Non-Visual Lyrics:** If a lyric is vocalization ('la la', 'ooh') or has no clear visual, output exactly: SENTENCE: (No visual)\n\n"
-    #         "Output *exactly* in this format for each line (NO extra words or explanation):\n"
-    #         "LYRIC: [the original lyric text]\n"
-    #         "SENTENCE: [the generated minimal visual description OR (No visual)]\n"
-    #         "<<END>>\n\n"
-    #         "--- Examples ---\n\n"
-    #         "Example 1:\n"
-    #         "LYRIC: The sky is crying tears of joy\n"
-    #         "SENTENCE: Sun showers falling\n"
-    #         "<<END>>\n\n"
-    #         "Example 2:\n"
-    #         "LYRIC: I'm lost in the crowd\n"
-    #         "SENTENCE: Person lost crowd\n"
-    #         "<<END>>\n\n"
-    #         "Example 3:\n"
-    #         "LYRIC: She walks in beauty, like the night\n"
-    #         "SENTENCE: Woman under stars\n"
-    #         "<<END>>\n\n"
-    #         "Example 4 (Abstract):\n"
-    #         "LYRIC: My heart is broken\n"
-    #         "SENTENCE: Broken heart shape\n"
-    #         "<<END>>\n\n"
-    #         "Example 5 (Non-Visual):\n"
-    #         "LYRIC: Fa-la-la-la-la\n"
-    #         "SENTENCE: (No visual)\n"
-    #         "<<END>>\n\n"
-    #         "Example 6 (Action Focus):\n"
-    #         "LYRIC: He ran fast through the field\n"
-    #         "SENTENCE: Man running field\n"
-    #         "<<END>>\n\n"
-    #         "Example 7 (Object Focus):\n"
-    #         "LYRIC: I see a red door and I want it painted black\n"
-    #         "SENTENCE: Red door painted black\n" # Focuses on the transformation/key objects
-    #         "<<END>>\n\n"
-    #         "Example 8 (More Complex Lyric -> Simplification):\n"
-    #         "LYRIC: The answer, my friend, is blowin' in the wind\n"
-    #         "SENTENCE: Wind blowing leaves\n" # Simplest related visual
-    #         "<<END>>\n\n"
-    #         "--- Lyrics to Analyze ---\n"
-    #         f"{cleaned_lyrics}"
-    #     )
-    #     return prompt
-
-
-
-
 
     def parse_section(self, section_text: str) -> Optional[Dict[str, str]]:
         section = section_text.strip()
